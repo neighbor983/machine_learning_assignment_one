@@ -1,54 +1,72 @@
 '''
-Simple Linear Regression: You are given the following training data.
-X	Y
-2.0	5.1
-2.5	6.1
-3.0	6.9
-3.5	7.8
-4.0	9.2
-4.5	9.9
-5.0	11.5
-5.5	12.0
-6.0	12.8
-
 a.	Model Y as a linear function of X. 
 b.	Use gradient descent learning algorithm to learn model parameters.  Use an appropriate 
     learning rate and convergence criterion. Plot J for the learning duration.
 '''
+'Given Values'
+training_data = [   { 'x': 2.0, 'y': 5.1},
+                    { 'x': 2.5, 'y': 6.1},
+                    { 'x': 3.0, 'y': 6.9},
+                    { 'x': 3.5, 'y': 7.8},
+                    { 'x': 4.0, 'y': 9.2},
+                    { 'x': 4.5, 'y': 9.9},
+                    { 'x': 5.0, 'y': 11.5},
+                    { 'x': 5.5, 'y': 12.0},
+                    { 'x': 6.0, 'y': 12.8}];
 
-training_data = [   {2.0, 5.1},
-                    {2.5,	6.1},
-                    {3.0,	6.9},
-                    {3.5,	7.8},
-                    {4.0,	9.2},
-                    {4.5,	9.9},
-                    {5.0,	11.5},
-                    {5.5,	12.0},
-                    {6.0,	12.8}];
 
-'Starting Values'
+
+'''
+description:
+    takes in the thetas and the x_i and returns the predicted y for a simple linear regression
+params:
+    theta_0 = number
+    theta_1 = number    
+    xi = number
+output:
+    float
+'''
+def Linear_Model(theta_0, theta_1, x_i):
+    return theta_0 + theta_1 * x_i;
+    
+'''
+description: 
+    takes in the thetas and a dataList and produces the mean square error for a simple linear model
+params:
+    theta_0 = number
+    theta_1 = number
+    dataList = List of objects with an "x" and "y" values
+output:
+    float
+'''
+def Mean_Squared_Error(theta_0, theta_1, dataList):
+    error_sum = 0.0;
+    for data in dataList:
+        x = data['x'];
+        y = data['y'];
+        error_sum += ( Linear_Model(theta_0, theta_1, x) - y ) ** 2;
+    return error_sum;
+
+'''
+description:
+params
+    alpha = number
+    theta_0 = number
+    theta_1 = number
+    dataList = List of objects with an "x" and "y" values
+output:
+'''
+def Simple_Linear_Cost_Fuction(alpha, theta_0, theta_1, dataList):
+    m = len(dataList);
+    return 1 / (2 * m) * Mean_Squared_Error(theta_0, theta_1, dataList);
+    
+
+    
+
+'Intial Guesses'
 theta_naught = 1;
 theta_one = 1;
-alpha = .5;
+learning_rate = .5;
 
 
-
-'''
-Multiple Linear Regression
-You are given the following training data.  
-X1	X2	y
-0	1	0.6
-1	0	2.4
-1	1	1.6
-2	1	3.4
-1	2	0.5
-
-Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
-a.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
-b.	Code and run the algorithm till convergence.
-You must submit the following
-1.	Source code
-2.	Output – Initial and final values of parameters; regression line and data; plots of J
-3.	Your observations and conclusions . 
-'''
-
+print(Mean_Squared_Error(theta_naught, theta_one, training_data));
