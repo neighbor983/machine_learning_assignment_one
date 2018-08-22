@@ -1,17 +1,17 @@
 # machine_learning_assignment_one
 
 Simple Linear Regression: You are given the following training data.
-X   |	Y
---- | ---
-2.0	| 5.1
-2.5	| 6.1
-3.0	| 6.9
-3.5	| 7.8
-4.0	| 9.2
-4.5	| 9.9
-5.0	| 11.5
-5.5	| 12.0
-6.0	| 12.8
+| X | Y |
+| - | - |
+| 2.0 | 5.1 |
+| 2.5 | 6.1 |
+| 3.0 | 6.9 |
+| 3.5 | 7.8 |
+| 4.0 | 9.2 |
+| 4.5 | 9.9 |
+| 5.0 | 11.5 |
+| 5.5 | 12.0 |
+| 6.0 | 12.8 |
 
 a.	Model Y as a linear function of X. 
 b.	Use gradient descent learning algorithm to learn model parameters.  Use an appropriate 
