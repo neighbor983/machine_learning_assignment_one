@@ -3,16 +3,7 @@ a.	Model Y as a linear function of X.
 b.	Use gradient descent learning algorithm to learn model parameters.  Use an appropriate 
     learning rate and convergence criterion. Plot J for the learning duration.
 '''
-#Given Values
-training_data = [   { 'x': 2.0, 'y': 5.1},
-                    { 'x': 2.5, 'y': 6.1},
-                    { 'x': 3.0, 'y': 6.9},
-                    { 'x': 3.5, 'y': 7.8},
-                    { 'x': 4.0, 'y': 9.2},
-                    { 'x': 4.5, 'y': 9.9},
-                    { 'x': 5.0, 'y': 11.5},
-                    { 'x': 5.5, 'y': 12.0},
-                    { 'x': 6.0, 'y': 12.8}];
+
 
 
 def Linear_Model(theta_0, theta_1, x_i):
@@ -28,7 +19,6 @@ def Linear_Model(theta_0, theta_1, x_i):
     '''
     return theta_0 + theta_1 * x_i;
     
-
 def Mean_Squared_Error(theta_0, theta_1, dataList):
     '''
     description: 
@@ -43,8 +33,7 @@ def Mean_Squared_Error(theta_0, theta_1, dataList):
     error_sum = 0.0;
     for data in dataList:
         error_sum += ( Linear_Model(theta_0, theta_1, data['x']) - data['y'] ) ** 2;
-    return error_sum;
-
+    return error_sum / len(dataList);
 
 def Simple_Linear_Theta0_Cost_Fuction(theta_0, theta_1, dataList):
     '''
@@ -58,8 +47,18 @@ def Simple_Linear_Theta0_Cost_Fuction(theta_0, theta_1, dataList):
         number
     '''
     m = len(dataList);
-    print(m);
-    return Mean_Squared_Error(theta_0, theta_1, dataList) / ( 2 * m );
+    return Mean_Squared_Error(theta_0, theta_1, dataList) / 2.0;
+    
+#Given Values
+training_data = [   { 'x': 2.0, 'y': 5.1},
+                    { 'x': 2.5, 'y': 6.1},
+                    { 'x': 3.0, 'y': 6.9},
+                    { 'x': 3.5, 'y': 7.8},
+                    { 'x': 4.0, 'y': 9.2},
+                    { 'x': 4.5, 'y': 9.9},
+                    { 'x': 5.0, 'y': 11.5},
+                    { 'x': 5.5, 'y': 12.0},
+                    { 'x': 6.0, 'y': 12.8}];
 
 #Intial Guesses
 theta_naught = 1;
