@@ -2,7 +2,7 @@
 
 Simple Linear Regression: You are given the following training data.
 | X | Y |
-| - | - |
+| --- | --- |
 | 2.0 | 5.1 |
 | 2.5 | 6.1 |
 | 3.0 | 6.9 |
