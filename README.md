@@ -14,8 +14,8 @@ Simple Linear Regression: You are given the following training data
 | 5.5 | 12.0 |
 | 6.0 | 12.8 |
 
-a.	Model Y as a linear function of X. 
-b.	Use gradient descent learning algorithm to learn model parameters.  Use an appropriate 
+1.	Model Y as a linear function of X. 
+2.	Use gradient descent learning algorithm to learn model parameters.  Use an appropriate 
     learning rate and convergence criterion. Plot J for the learning duration.
 
 Multiple Linear Regression
@@ -30,8 +30,9 @@ You are given the following training data.
 | 1 | 2 | 0.5 |
 
 Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
-a.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
-b.	Code and run the algorithm till convergence.
+1.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
+2.	Code and run the algorithm till convergence.
+
 You must submit the following
 1.	Source code
 2.	Output – Initial and final values of parameters; regression line and data; plots of J
