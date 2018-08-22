@@ -20,13 +20,14 @@ b.	Use gradient descent learning algorithm to learn model parameters.  Use an ap
 
 Multiple Linear Regression
 You are given the following training data.  
-X1 | X2 | y
--- | -- | --
-0 | 1 |	0.6
-1 |	0 |	2.4
-1 |	1 |	1.6
-2 |	1 |	3.4
-1 |	2 |	0.5
+
+| X1 | X2 | y |
+| --- | --- | ---|
+| 0 | 1 | 0.6 |
+| 1 | 0 | 2.4 |
+| 1 | 1 | 1.6 |
+| 2 | 1 | 3.4 |
+| 1 | 2 | 0.5 |
 
 Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
 a.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
