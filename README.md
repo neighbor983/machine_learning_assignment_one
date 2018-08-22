@@ -1,6 +1,7 @@
 # machine_learning_assignment_one
 
-Simple Linear Regression: You are given the following training data.
+Simple Linear Regression: You are given the following training data
+
 | X | Y |
 | --- | --- |
 | 2.0 | 5.1 |
