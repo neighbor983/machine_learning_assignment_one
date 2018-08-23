@@ -4,8 +4,6 @@ b.	Use gradient descent learning algorithm to learn model parameters.  Use an ap
     learning rate and convergence criterion. Plot J for the learning duration.
 '''
 
-
-
 def Linear_Model(theta_0, theta_1, x_i):
     '''
     description:
@@ -35,6 +33,66 @@ def Theta0_Mean_Squared_Error(theta_0, theta_1, dataList):
     for data in dataList:
         error_sum += ( Linear_Model(theta_0, theta_1, data['x']) - data['y'] ) ** 2;
     return error_sum / len(dataList);
+
+def Theta0_Partial_Derivative(theta_0, theta_1, dataList):
+    '''
+    description: 
+        takes in the thetas and a dataList and produce the partial derivative 
+        with respect to theta_0 when using a simple linear model
+    params:
+        theta_0 = number
+        theta_1 = number
+        dataList = List of objects with an "x" and "y" values
+    output:
+        number
+    '''
+    total = 0.0;
+    for data in dataList:
+        total += (Linear_Model(theta_0, theta_1, data['x']) - data['y']);
+    return total / len(dataList);
+
+def Theta1_Partial_Derivative(theta_0, theta_1, dataList):
+    '''
+    description: 
+        takes in the thetas and a dataList and produce the partial derivative 
+        with respect to theta_1 when using a simple linear model
+    params:
+        theta_0 = number
+        theta_1 = number
+        dataList = List of objects with an "x" and "y" values
+    output:
+        number
+    '''
+    total = 0.0;
+    for data in dataList:
+        total += ((Linear_Model(theta_0, theta_1, data['x']) - data['y']) * data['x']);
+    return total / len(dataList);
+
+def Theta0_Gradient_Descent(alpha, old_theta0, partial_derivative):
+    '''
+    description:
+        Use gradient descent to generate the new theta_naught
+    params:
+        alpha = number 
+        old_theta0 = number 
+        partial_derivative = number
+    output:
+        output
+    '''
+    return old_theta0 - ( alpha * partial_derivative);
+
+def Theta1_Gradient_Descent(alpha, old_theta1, partial_derivative):
+    '''
+    description:
+        Use gradient descent to generate the new theta_1
+    params:
+        alpha = number 
+        old_theta1 = number 
+        partial_derivative = number
+    output:
+        output
+    '''
+    return old_theta1 - ( alpha * partial_derivative);
 
 def Simple_Linear_Theta0_Cost_Fuction(theta_0, theta_1, dataList):
     '''
