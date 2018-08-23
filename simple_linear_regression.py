@@ -129,7 +129,7 @@ count = 0
 
 J_theta = [];
 
-while(abs(previous_cost - new_cost) > .00001):
+while((previous_cost - new_cost) > 0):
     previous_cost = new_cost;
     theta_naught = Theta0_Gradient_Descent(learning_rate, theta_naught, 
                     Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
