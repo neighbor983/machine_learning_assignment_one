@@ -124,17 +124,32 @@ training_data = [   { 'x': 2.0, 'y': 5.1},
 
 #Intial Guesses
 theta_naught = 1;
-theta_naught_new = theta_naught;
 theta_one = 2;
+learning_rate = 1;
+
+'''
+Tried learning_rate  
+    1 didn't converge
+    .5 didn't converge
+    .1 didn't converge
+    .05 did converege
+    .07 didn't converege
+    .06 did converege
+'''
+
+#Need a starting point for the loop
+theta_naught_new = theta_naught;
 theta_one_new = theta_one;
-learning_rate = .005;
 previous_cost = 100.0;
 new_cost = 90.0;
 count = 0
-
 J_theta = [];
 
-while( Percent_Difference(previous_cost, new_cost)  > 0.0001):
+'''
+Continue to iteriate if the the cost goes down and the percent of the change 
+compared to the previous_cost is greater then .001%
+'''
+while( ( (previous_cost - new_cost) / previous_cost) > 0.00001):
     previous_cost = new_cost;
     theta_naught = theta_naught_new;
     theta_one =theta_one_new;
@@ -142,10 +157,12 @@ while( Percent_Difference(previous_cost, new_cost)  > 0.0001):
                     Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
     theta_one_new = Theta1_Gradient_Descent(learning_rate, theta_naught, 
                     Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
-    print("theta_naught: " + str(theta_naught_new) );
-    print("theta_one: " + str(theta_one_new) );
+    #print("theta_naught: " + str(theta_naught_new) );
+    #print("theta_one: " + str(theta_one_new) );
     new_cost = Cost_Function(theta_naught_new, theta_one_new, training_data);
     print("Cost: " + str(new_cost));
     count+=1;
-    print("Count: " + str(count));
+    #print("Count: " + str(count));
     J_theta.append({'count': count, 'cost': new_cost});
+    
+    
