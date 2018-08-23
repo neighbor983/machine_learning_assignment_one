@@ -108,6 +108,9 @@ def Simple_Linear_Theta0_Cost_Fuction(theta_0, theta_1, dataList):
     m = len(dataList);
     return Theta0_Mean_Squared_Error(theta_0, theta_1, dataList) / 2.0;
     
+def Percent_Difference(value1, value2):
+    return ( abs(value1 - value2) / value1  );
+    
 #Given Values
 training_data = [   { 'x': 2.0, 'y': 5.1},
                     { 'x': 2.5, 'y': 6.1},
@@ -120,24 +123,28 @@ training_data = [   { 'x': 2.0, 'y': 5.1},
                     { 'x': 6.0, 'y': 12.8}];
 
 #Intial Guesses
-theta_naught = 2;
+theta_naught = 1;
+theta_naught_new = theta_naught;
 theta_one = 2;
-learning_rate = .0005;
-previous_cost = 100;
-new_cost = 90;
+theta_one_new = theta_one;
+learning_rate = .005;
+previous_cost = 100.0;
+new_cost = 90.0;
 count = 0
 
 J_theta = [];
 
-while((previous_cost - new_cost) > 0):
+while( Percent_Difference(previous_cost, new_cost)  > 0.0001):
     previous_cost = new_cost;
-    theta_naught = Theta0_Gradient_Descent(learning_rate, theta_naught, 
+    theta_naught = theta_naught_new;
+    theta_one =theta_one_new;
+    theta_naught_new = Theta0_Gradient_Descent(learning_rate, theta_naught, 
                     Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
-    theta_one = Theta1_Gradient_Descent(learning_rate, theta_naught, 
+    theta_one_new = Theta1_Gradient_Descent(learning_rate, theta_naught, 
                     Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
-    print("theta_naught: " + str(theta_naught) );
-    print("theta_one: " + str(theta_one) );
-    new_cost = Cost_Function(theta_naught, theta_one, training_data);
+    print("theta_naught: " + str(theta_naught_new) );
+    print("theta_one: " + str(theta_one_new) );
+    new_cost = Cost_Function(theta_naught_new, theta_one_new, training_data);
     print("Cost: " + str(new_cost));
     count+=1;
     print("Count: " + str(count));
