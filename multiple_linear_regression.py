@@ -99,7 +99,7 @@ def Theta2_Partial_Derivative(theta0, theta1, theta2, dataList):
      return total / len(dataList); 
 
 #Given 
-data = [
+training_data = [
      { 'x1': 0, 'x2':  1, 'y': 0.6 },
      { 'x1': 1, 'x2':  0, 'y': 2.4 },
      { 'x1': 1, 'x2':  1, 'y': 1.6 },
@@ -112,7 +112,35 @@ theta_0 = 1;
 theta_1 = 1;
 theta_2 = 1;
 
+theta_0_new = Theta_Gradient_Descent(learning_rate, theta_0, 
+               Theta0_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
+theta_1_new = Theta_Gradient_Descent(learning_rate, theta_1, 
+               Theta1_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
+theta_2_new = Theta_Gradient_Descent(learning_rate, theta_2, 
+               Theta2_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
+print('First Update: ');
+print('theta0: ' + str(theta_0_new));
+print('theta1: ' + str(theta_1_new));
+print('theta2: ' + str(theta_2_new));
 
-'''
-     model = theta_0 + theta_1 * x_1 + theta_2 * x_2`
-'''
+theta_0_new1 = Theta_Gradient_Descent(learning_rate, theta_0_new, 
+               Theta0_Partial_Derivative(theta_0_new, theta_1_new, theta_2_new, training_data));
+theta_1_new1 = Theta_Gradient_Descent(learning_rate, theta_1_new, 
+               Theta1_Partial_Derivative(theta_0_new, theta_1_new, theta_2_new, training_data));
+theta_2_new1 = Theta_Gradient_Descent(learning_rate, theta_2_new, 
+               Theta2_Partial_Derivative(theta_0_new, theta_1_new, theta_2_new, training_data));
+print('Second Update: ');
+print('theta0: ' + str(theta_0_new1));
+print('theta1: ' + str(theta_1_new1));
+print('theta2: ' + str(theta_2_new1));
+
+theta_0_new2 = Theta_Gradient_Descent(learning_rate, theta_0_new1, 
+               Theta0_Partial_Derivative(theta_0_new1, theta_1_new1, theta_2_new1, training_data));
+theta_1_new2 = Theta_Gradient_Descent(learning_rate, theta_1_new1, 
+               Theta1_Partial_Derivative(theta_0_new1, theta_1_new1, theta_2_new1, training_data));
+theta_2_new2 = Theta_Gradient_Descent(learning_rate, theta_2_new1, 
+               Theta2_Partial_Derivative(theta_0_new1, theta_1_new1, theta_2_new1, training_data));
+print('Thrid Update: ');
+print('theta0: ' + str(theta_0_new2));
+print('theta1: ' + str(theta_1_new2));
+print('theta2: ' + str(theta_2_new2));
