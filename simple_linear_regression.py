@@ -18,25 +18,8 @@ def Linear_Model(theta_0, theta_1, x_i):
 def Cost_Function(theta_0, theta_1, dataList):
     total = 0.0;
     for data in dataList:
-        total = total + (Linear_Model(theta_0, theta_1, data['x']) - data['y']) ** 2;
+        total += ( (Linear_Model(theta_0, theta_1, data['x']) - data['y']) ** 2);
     return total / ( 2.0 * len(dataList) );
-
-def Theta0_Mean_Squared_Error(theta_0, theta_1, dataList):
-    '''
-    description: 
-        takes in the thetas and a dataList and produces the mean square error 
-        for theta_0 when using a simple linear model
-    params:
-        theta_0 = number
-        theta_1 = number
-        dataList = List of objects with an "x" and "y" values
-    output:
-        number
-    '''
-    error_sum = 0.0;
-    for data in dataList:
-        error_sum += ( Linear_Model(theta_0, theta_1, data['x']) - data['y'] ) ** 2;
-    return error_sum / len(dataList);
 
 def Theta0_Partial_Derivative(theta_0, theta_1, dataList):
     '''
@@ -72,49 +55,19 @@ def Theta1_Partial_Derivative(theta_0, theta_1, dataList):
         total += ((Linear_Model(theta_0, theta_1, data['x']) - data['y']) * data['x']);
     return total / len(dataList);
 
-def Theta0_Gradient_Descent(alpha, old_theta0, partial_derivative):
+def Theta_Gradient_Descent(alpha, old_theta, partial_derivative):
     '''
     description:
-        Use gradient descent to generate the new theta_naught
+        Use gradient descent to generate the new theta
     params:
         alpha = number 
-        old_theta0 = number 
+        old_theta = number 
         partial_derivative = number
     output:
         output
     '''
-    return old_theta0 - ( alpha * partial_derivative);
+    return old_theta - ( alpha * partial_derivative );
 
-def Theta1_Gradient_Descent(alpha, old_theta1, partial_derivative):
-    '''
-    description:
-        Use gradient descent to generate the new theta_1
-    params:
-        alpha = number 
-        old_theta1 = number 
-        partial_derivative = number
-    output:
-        output
-    '''
-    return old_theta1 - ( alpha * partial_derivative);
-
-def Simple_Linear_Theta0_Cost_Fuction(theta_0, theta_1, dataList):
-    '''
-    description:
-        takes in thetas and dataList and produces the cost function for theta_0
-    params:
-        theta_0 = number
-        theta_1 = number
-        dataList = List of objects with an "x" and "y" values
-    output:
-        number
-    '''
-    m = len(dataList);
-    return Theta0_Mean_Squared_Error(theta_0, theta_1, dataList) / 2.0;
-    
-def Percent_Difference(value1, value2):
-    return ( abs(value1 - value2) / value1  );
-    
 #Given Values
 training_data = [   { 'x': 2.0, 'y': 5.1},
                     { 'x': 2.5, 'y': 6.1},
@@ -164,9 +117,9 @@ while( ( (previous_cost - new_cost) / previous_cost) > 0.00001):
     previous_cost = new_cost;
     theta_naught = theta_naught_new;
     theta_one =theta_one_new;
-    theta_naught_new = Theta0_Gradient_Descent(learning_rate, theta_naught, 
+    theta_naught_new = Theta_Gradient_Descent(learning_rate, theta_naught, 
                     Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
-    theta_one_new = Theta1_Gradient_Descent(learning_rate, theta_naught, 
+    theta_one_new = Theta_Gradient_Descent(learning_rate, theta_naught, 
                     Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
     new_cost = Cost_Function(theta_naught_new, theta_one_new, training_data);
     print("Cost: " + str(new_cost));
