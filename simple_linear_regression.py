@@ -1,9 +1,3 @@
-'''
-a.	Model Y as a linear function of X. 
-b.	Use gradient descent learning algorithm to learn model parameters.  Use an appropriate 
-    learning rate and convergence criterion. Plot J for the learning duration.
-'''
-
 def Linear_Model(theta_0, theta_1, x_i):
     '''
     description:
@@ -17,6 +11,12 @@ def Linear_Model(theta_0, theta_1, x_i):
     '''
     return theta_0 + theta_1 * x_i;
     
+def Cost_Function(theta_0, theta_1, dataList):
+    total = 0.0;
+    for data in dataList:
+        total = total + (Linear_Model(theta_0, theta_1, data['x']) - data['y']) ** 2;
+    return total / ( 2.0 * len(dataList) );
+
 def Theta0_Mean_Squared_Error(theta_0, theta_1, dataList):
     '''
     description: 
@@ -121,9 +121,26 @@ training_data = [   { 'x': 2.0, 'y': 5.1},
 
 #Intial Guesses
 theta_naught = 1;
-theta_one = 1;
-learning_rate = .5;
+theta_one = 2;
+learning_rate = .05;
+previous_cost = 10000000;
+new_cost = 0;
+count = 0
 
-
-print(Theta0_Mean_Squared_Error(theta_naught, theta_one, training_data));
-print(Simple_Linear_Theta0_Cost_Fuction(theta_naught, theta_one, training_data));
+while(abs(previous_cost - new_cost) > .0001):
+#for theta in range(1, 10000):
+    previous_cost = new_cost;
+    theta_naught = Theta0_Gradient_Descent(learning_rate, theta_naught, 
+                    Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
+    theta_one = Theta1_Gradient_Descent(learning_rate, theta_naught, 
+                    Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
+    print("theta_naught:" );
+    print(theta_naught);
+    print("theta_one: ");
+    print(theta_one);
+    new_cost = Cost_Function(theta_naught, theta_one, training_data);
+    print("Cost: ");
+    print(new_cost);
+    print("Count: ");
+    count+=1;
+    print(count);
