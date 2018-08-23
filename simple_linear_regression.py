@@ -2,8 +2,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-
-
 def Linear_Model(theta_0, theta_1, x_i):
     '''
     description:
@@ -187,5 +185,8 @@ for J in J_theta:
     iteriation.append(J['count']);
 
 plt.plot(iteriation, cost);
+plt.xlabel('Itierations')
+plt.ylabel('J(theta) Cost')
+plt.title('J(theta) vs Itierations')
 
 plt.savefig("display.svg");
