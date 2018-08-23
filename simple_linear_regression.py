@@ -120,27 +120,25 @@ training_data = [   { 'x': 2.0, 'y': 5.1},
                     { 'x': 6.0, 'y': 12.8}];
 
 #Intial Guesses
-theta_naught = 1;
+theta_naught = 2;
 theta_one = 2;
-learning_rate = .05;
-previous_cost = 10000000;
-new_cost = 0;
+learning_rate = .0005;
+previous_cost = 100;
+new_cost = 90;
 count = 0
 
-while(abs(previous_cost - new_cost) > .0001):
-#for theta in range(1, 10000):
+J_theta = [];
+
+while(abs(previous_cost - new_cost) > .00001):
     previous_cost = new_cost;
     theta_naught = Theta0_Gradient_Descent(learning_rate, theta_naught, 
                     Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
     theta_one = Theta1_Gradient_Descent(learning_rate, theta_naught, 
                     Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
-    print("theta_naught:" );
-    print(theta_naught);
-    print("theta_one: ");
-    print(theta_one);
+    print("theta_naught: " + str(theta_naught) );
+    print("theta_one: " + str(theta_one) );
     new_cost = Cost_Function(theta_naught, theta_one, training_data);
-    print("Cost: ");
-    print(new_cost);
-    print("Count: ");
+    print("Cost: " + str(new_cost));
     count+=1;
-    print(count);
+    print("Count: " + str(count));
+    J_theta.append({'count': count, 'cost': new_cost});
