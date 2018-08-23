@@ -6,7 +6,7 @@ Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01
 You must submit the following
 1.	Source code
 2.	Output – Initial and final values of parameters; regression line and data; plots of J
-3.	Your observations and conclusions .
+3.	Your observations and conclusions.
 
 '''
 def Linear_Model(theta0, theta1, theta2, x1, x2):
@@ -111,6 +111,9 @@ learning_rate = .01;
 theta_0 = 1;
 theta_1 = 1;
 theta_2 = 1;
+new_theta0 = theta_0;
+new_theta1 = theta_1;
+new_theta2 = theta_2; 
 
 theta_0_new = Theta_Gradient_Descent(learning_rate, theta_0, 
                Theta0_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
@@ -144,3 +147,27 @@ print('Thrid Update: ');
 print('theta0: ' + str(theta_0_new2));
 print('theta1: ' + str(theta_1_new2));
 print('theta2: ' + str(theta_2_new2));
+
+
+previous_cost = 10;
+new_cost = 5;
+
+while( (previous_cost - new_cost) / previous_cost > .00001 ):
+     previous_cost = new_cost;
+     theta_0 = new_theta0;
+     theta_1 = new_theta1;
+     theta_2 = new_theta2;
+     new_theta0 = Theta_Gradient_Descent(learning_rate, theta_0, 
+               Theta0_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
+     new_theta1 = Theta_Gradient_Descent(learning_rate, theta_1, 
+               Theta1_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
+     new_theta2 = Theta_Gradient_Descent(learning_rate, theta_2, 
+               Theta2_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
+     new_cost = Cost_Function(new_theta0, new_theta1, new_theta2, training_data);
+     print("Cost: " + str(new_cost));
+
+print('Final Update: ');
+print('theta0: ' + str(theta_0));
+print('theta1: ' + str(theta_1));
+print('theta2: ' + str(theta_2));
+print('Model: ' + str(theta_0) + ' + ' + str(theta_1) + ' * x1 + ' + str(theta_2) + ' * x2');
