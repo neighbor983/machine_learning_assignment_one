@@ -1,3 +1,9 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+
+
 def Linear_Model(theta_0, theta_1, x_i):
     '''
     description:
@@ -123,18 +129,25 @@ training_data = [   { 'x': 2.0, 'y': 5.1},
                     { 'x': 6.0, 'y': 12.8}];
 
 #Intial Guesses
-theta_naught = 1;
-theta_one = 2;
-learning_rate = 1;
+theta_naught = 1.0;
+theta_one = 1.5;
+learning_rate = .0099;
 
 '''
 Tried learning_rate  
     1 didn't converge
-    .5 didn't converge
-    .1 didn't converge
-    .05 did converege
-    .07 didn't converege
-    .06 did converege
+    .5 didn't converge 
+    .1 did converge 6.3 cost
+    .05 did converge .07 cost
+    .01 did converge .05104 cost
+    .005 did converge .051146 cost
+    .007 did converge .051102 cost
+    .008 did converge .0510815 cost
+    .009 did converge .0510606 cost
+    .0095 did converge .0510507 cost
+    .00975 did converge .0510453 cost
+    .0098 did converge .0510443 cost
+    .0099 did converge .0510423 cost
 '''
 
 #Need a starting point for the loop
@@ -157,12 +170,22 @@ while( ( (previous_cost - new_cost) / previous_cost) > 0.00001):
                     Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
     theta_one_new = Theta1_Gradient_Descent(learning_rate, theta_naught, 
                     Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
-    #print("theta_naught: " + str(theta_naught_new) );
-    #print("theta_one: " + str(theta_one_new) );
     new_cost = Cost_Function(theta_naught_new, theta_one_new, training_data);
     print("Cost: " + str(new_cost));
     count+=1;
-    #print("Count: " + str(count));
     J_theta.append({'count': count, 'cost': new_cost});
     
-    
+print("theta_naught: " + str(theta_naught_new) );
+print("theta_one: " + str(theta_one_new) );    
+print('Count: ' + str(count));
+
+cost = [];
+iteriation = [];
+
+for J in J_theta:
+    cost.append(J['cost']);
+    iteriation.append(J['count']);
+
+plt.plot(iteriation, cost);
+
+plt.savefig("display.svg");
