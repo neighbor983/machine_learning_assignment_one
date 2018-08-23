@@ -9,6 +9,22 @@ You must submit the following
 3.	Your observations and conclusions .
 
 '''
+def Linear_Model(theta0, theta1, theta2, x1, x2):
+     '''
+     description:
+          takes in the thetas and the xs and returns the predicted y for a 
+          multiple linear regression
+     params:
+        theta0 = number
+        theta1 = number
+        theta2 = number
+        x1 = number
+        x2 = number
+     output:
+        number
+     '''
+     return theta0 + theta1 * x1 + theta2 * x2;
+     
 
 #Given 
 data = [
@@ -23,3 +39,8 @@ learning_rate = .01;
 theta_0 = 1;
 theta_1 = 1;
 theta_2 = 1;
+
+
+'''
+     model = theta_0 + theta_1 * x_1 + theta_2 * x_2`
+'''
