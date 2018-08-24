@@ -95,18 +95,16 @@ count = 0.0;
 runs = [];
 
 j_theta = cost_function(theta0, theta1, alpha, m, data_List);
-#print("J: " + str(j_theta));
 count += 1;
-runs.append({'run' : count, "J": j_theta});
+runs.append({'run' : count, "J": j_theta, "theta_0": theta0, "theta_1": theta1});
 
 theta0_new = theta0_gradient(theta0, theta1, alpha, m, data_List);
 theta1_new = theta1_gradient(theta0, theta1, alpha, m, data_List);
 theta0 = theta0_new;
 theta1 = theta1_new;
 j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
-#print("J_new: " + str(j_theta_new));
 count += 1;
-runs.append({'run' : count, "J": j_theta});
+runs.append({'run' : count, "J": j_theta, "theta_0": theta0, "theta_1": theta1});
 
 while( j_theta > ( j_theta_new * 1.000001 ) ):
     theta0_new = theta0_gradient(theta0, theta1, alpha, m, data_List);
@@ -116,23 +114,23 @@ while( j_theta > ( j_theta_new * 1.000001 ) ):
     j_theta = j_theta_new;
     j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
     count += 1;
-    runs.append({'run' : count, "J": j_theta});
-    #print("J: " + str(j_theta_new));
-    #print("Thetaknot: " + str(theta0_new));
-    #print("ThetaOne: " + str(theta1_new));
-
-print('count: ' + str(count));
+    runs.append({'run' : count, "J": j_theta, "theta_0": theta0, "theta_1": theta1});
 
 cost = [];
 iteriation = [];
+theta0s = [];
+theta1s = [];
 
 for run in runs:
     cost.append(run['J']);
     iteriation.append(run['run']);
+    theta0s.append(run['theta_0']);
+    theta1s.append(run['theta_1']);
+
 
 plt.plot(iteriation, cost);
 plt.xlabel('Runs');
 plt.ylabel('J(theta) Cost');
-plt.title('Problem 1 - J(theta) vs Runs');
+plt.title('Problem 1 \nJ(theta) vs Runs');
 
 plt.savefig("Problem1_Cost_vs_Runs.svg");

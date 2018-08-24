@@ -130,75 +130,66 @@ dataList = [
      { 'x1': 1, 'x2':  2, 'y': 0.5}
     ];
 
-learning_rate = .01;
+alpha = .01;
 theta0 = 1;
 theta1 = 1;
 theta2 = 1;
+m = len(dataList);
+count = 0; 
+runs = [];
 
-'''
-First Iteraions
-'''
-new_theta0 = theta0;
-new_theta1 = theta1;
-new_theta2 = theta2; 
+j_theta = Cost_Function(theta0, theta1, theta2, alpha, m, dataList);
+count += 1;
+runs.append({'run' : count, "J": j_theta});
 
+#First Iteraion
+new_theta0 = Theta0_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+new_theta1 = Theta1_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+new_theta2 = Theta2_Gradient(theta0, theta1, theta2, alpha, m, dataList); 
 
+j_theta = Cost_Function(theta0, theta1, theta2, alpha, m, dataList);
+count += 1;
+runs.append({'run' : count, "J": j_theta});
 
+#Second Iteraion
+theta0 = new_theta0;
+theta1 = new_theta1;
+theta2 = new_theta2;
+new_theta0 = Theta0_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+new_theta1 = Theta1_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+new_theta2 = Theta2_Gradient(theta0, theta1, theta2, alpha, m, dataList); 
 
+j_theta = Cost_Function(theta0, theta1, theta2, alpha, m, dataList);
+count += 1;
+runs.append({'run' : count, "J": j_theta});
 
-theta_0_new = Theta_Gradient_Descent(learning_rate, theta_0, 
-               Theta0_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
-theta_1_new = Theta_Gradient_Descent(learning_rate, theta_1, 
-               Theta1_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
-theta_2_new = Theta_Gradient_Descent(learning_rate, theta_2, 
-               Theta2_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
-print('First Update: ');
-print('theta0: ' + str(theta_0_new));
-print('theta1: ' + str(theta_1_new));
-print('theta2: ' + str(theta_2_new));
+#Third Iteraion
+theta0 = new_theta0;
+theta1 = new_theta1;
+theta2 = new_theta2;
+new_theta0 = Theta0_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+new_theta1 = Theta1_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+new_theta2 = Theta2_Gradient(theta0, theta1, theta2, alpha, m, dataList); 
 
-theta_0_new1 = Theta_Gradient_Descent(learning_rate, theta_0_new, 
-               Theta0_Partial_Derivative(theta_0_new, theta_1_new, theta_2_new, training_data));
-theta_1_new1 = Theta_Gradient_Descent(learning_rate, theta_1_new, 
-               Theta1_Partial_Derivative(theta_0_new, theta_1_new, theta_2_new, training_data));
-theta_2_new1 = Theta_Gradient_Descent(learning_rate, theta_2_new, 
-               Theta2_Partial_Derivative(theta_0_new, theta_1_new, theta_2_new, training_data));
-print('Second Update: ');
-print('theta0: ' + str(theta_0_new1));
-print('theta1: ' + str(theta_1_new1));
-print('theta2: ' + str(theta_2_new1));
-
-theta_0_new2 = Theta_Gradient_Descent(learning_rate, theta_0_new1, 
-               Theta0_Partial_Derivative(theta_0_new1, theta_1_new1, theta_2_new1, training_data));
-theta_1_new2 = Theta_Gradient_Descent(learning_rate, theta_1_new1, 
-               Theta1_Partial_Derivative(theta_0_new1, theta_1_new1, theta_2_new1, training_data));
-theta_2_new2 = Theta_Gradient_Descent(learning_rate, theta_2_new1, 
-               Theta2_Partial_Derivative(theta_0_new1, theta_1_new1, theta_2_new1, training_data));
-print('Thrid Update: ');
-print('theta0: ' + str(theta_0_new2));
-print('theta1: ' + str(theta_1_new2));
-print('theta2: ' + str(theta_2_new2));
+j_theta_new = Cost_Function(theta0, theta1, theta2, alpha, m, dataList);
+count += 1;
+runs.append({'run' : count, "J": j_theta_new});
 
 
-previous_cost = 10;
-new_cost = 5;
-
-while( (previous_cost - new_cost) / previous_cost > .00001 ):
-     previous_cost = new_cost;
-     theta_0 = new_theta0;
-     theta_1 = new_theta1;
-     theta_2 = new_theta2;
-     new_theta0 = Theta_Gradient_Descent(learning_rate, theta_0, 
-               Theta0_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
-     new_theta1 = Theta_Gradient_Descent(learning_rate, theta_1, 
-               Theta1_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
-     new_theta2 = Theta_Gradient_Descent(learning_rate, theta_2, 
-               Theta2_Partial_Derivative(theta_0, theta_1, theta_2, training_data));
-     new_cost = Cost_Function(new_theta0, new_theta1, new_theta2, training_data);
-     print("Cost: " + str(new_cost));
-
-print('Final Update: ');
-print('theta0: ' + str(theta_0));
-print('theta1: ' + str(theta_1));
-print('theta2: ' + str(theta_2));
-print('Model: ' + str(theta_0) + ' + ' + str(theta_1) + ' * x1 + ' + str(theta_2) + ' * x2');
+while(j_theta  > (j_theta_new * 1.00001) ):
+    j_theta = j_theta_new;
+    theta0 = new_theta0;
+    theta1 = new_theta1;
+    theta2 = new_theta2;
+    new_theta0 = Theta0_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+    new_theta1 = Theta1_Gradient(theta0, theta1, theta2, alpha, m, dataList);
+    new_theta2 = Theta2_Gradient(theta0, theta1, theta2, alpha, m, dataList); 
+    j_theta_new = Cost_Function(theta0, theta1, theta2, alpha, m, dataList);
+    count += 1;
+    runs.append({'run' : count, "J": j_theta_new});
+    
+print("count: " + str(count));
+print("theta0: " + str(new_theta0));
+print("theta1: " + str(new_theta1));
+print("theta2: " + str(new_theta2));
+print("J(0): " + str(j_theta_new));
