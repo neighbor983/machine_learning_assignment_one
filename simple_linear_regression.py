@@ -127,10 +127,24 @@ for run in runs:
     theta0s.append(run['theta_0']);
     theta1s.append(run['theta_1']);
 
+x = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0];
+y = [5.1, 6.1, 6.9, 7.8, 9.2, 9.9, 11.5, 12.0, 12.8];
+y1 = [];
+for item in x:
+    y1.append(theta0s[-1] + theta1s[-1] * item);
 
+plt.scatter(x,y);
+plt.plot(x,y1);
+plt.xlabel('x');
+plt.ylabel('y');
+plt.title('Problem 1 \nTraining Data');
+
+plt.savefig("Problem1_Training_Data.svg");
+'''
 plt.plot(iteriation, cost);
 plt.xlabel('Runs');
 plt.ylabel('J(theta) Cost');
 plt.title('Problem 1 \nJ(theta) vs Runs');
 
 plt.savefig("Problem1_Cost_vs_Runs.svg");
+'''

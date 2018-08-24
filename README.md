@@ -36,4 +36,4 @@ Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01
 You must submit the following
 1.	Source code
 2.	Output – Initial and final values of parameters; regression line and data; plots of J
-3.	Your observations and conclusions .
+3.	Your observations and conclusions.
