@@ -1,3 +1,7 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 '''
 Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
 1.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
@@ -10,96 +14,115 @@ You must submit the following
 
 '''
 def Linear_Model(theta0, theta1, theta2, x1, x2):
-     '''
-     description:
-          takes in the thetas and the xs and returns the predicted y for a 
-          multiple linear regression
-     params:
+    '''
+    description:
+        takes in the thetas and the xs and returns the predicted y for a 
+        multiple linear regression
+    params:
+        theta0 = number
+        theta1 = number  
+        theta2 = number  
+        x1 = number
+        x2 = number  
+    output:
+        number
+    '''
+    return theta0 + theta1 * x1 + theta2 * x2;
+    
+def Cost_Function(theta0, theta1, theta2, alpha, m, dataList):
+    '''
+    description:
+        get the cost for a given model and thetas
+    params:
         theta0 = number
         theta1 = number
         theta2 = number
-        x1 = number
-        x2 = number
-     output:
+        alpha = number
+        m = number
+        dataList = list of objects with 'x1', 'x2' and 'y'
+    output:
         number
-     '''
-     return theta0 + theta1 * x1 + theta2 * x2;
+    '''
+    summation = 0.0;
+    for row in dataList: 
+        x1 = row['x1'];
+        x2 = row['x2'];
+        y = row['y'];
+        summation += (Linear_Model(theta0, theta1, theta2, x1, x2) - y)**2;
+    cost = ( .5 * m ) * summation;
+    return cost;
      
-def Cost_Function(theta0, theta1, theta2, dataList):
-     total = 0.0;
-     for data in dataList:
-          total += ( ( Linear_Model(theta0, theta1, theta2, data['x1'], data['x2'] ) - data['y'] ) ** 2 )
-     return total / len(dataList);     
-     
-def Theta_Gradient_Descent(alpha, old_theta, partial_derivative):
+def Theta0_Gradient(theta0, theta1, theta2, alpha, m, dataList) : 
     '''
     description:
-        Use gradient descent to generate the new theta
+        Use gradient descent to generate the new theta0
     params:
-        alpha = number 
-        old_theta = number 
-        partial_derivative = number
+        theta0 = number
+        theta1 = number
+        theta2 = number
+        alpha = number
+        m = number
+        dataList = list of objects with 'x1', 'x2' and 'y'
     output:
-        output
+        number
     '''
-    return old_theta - ( alpha * partial_derivative );
+    summation = 0.0;
+    for row in dataList:  
+        x1 = row['x1'];
+        x2 = row['x2'];
+        y = row['y'];
+        summation += (Linear_Model(theta0, theta1, theta2, x1, x2) - y);
+    theta0 = theta0 - ( alpha / m) * summation;
+    return theta0
     
-def Theta0_Partial_Derivative(theta0, theta1, theta2, dataList):
-     '''
-     description: 
-        takes in the thetas and a dataList and produce the partial derivative 
-        with respect to theta_0 when using a multiple linear model
-     params:
-        theta_0 = number
-        theta_1 = number
-        theta_2 = number
-        dataList = List of objects with "x1", "x2", and "y" values
-     output:
+def Theta1_Gradient(theta0, theta1, theta2, alpha, m, dataList) : 
+    '''
+    description:
+        Use gradient descent to generate the new theta1
+    params:
+        theta0 = number
+        theta1 = number
+        theta2 = number
+        alpha = number
+        m = number
+        dataList = list of objects with 'x1', 'x2' and 'y'
+    output:
         number
-     '''
-     total = 0.0;
-     for data in dataList:
-          total += ( Linear_Model(theta0, theta1, theta2, data['x1'], data['x2']) - data['y'] );
-     return total / len(dataList);
-     
-def Theta1_Partial_Derivative(theta0, theta1, theta2, dataList):
-     '''
-     description: 
-        takes in the thetas and a dataList and produce the partial derivative 
-        with respect to theta_1 when using a multiple linear model
-     params:
-        theta_0 = number
-        theta_1 = number
-        theta_2 = number
-        dataList = List of objects with "x1", "x2", and "y" values
-     output:
-        number
-     '''
-     total = 0.0;
-     for data in dataList:
-          total += ( ( Linear_Model(theta0, theta1, theta2, data['x1'], data['x2']) - data['y'] ) * data['x1'] );
-     return total / len(dataList);     
+    '''
+    summation = 0.0;
+    for row in dataList:  
+        x1 = row['x1'];
+        x2 = row['x2'];
+        y = row['y'];
+        summation += ( (Linear_Model(theta0, theta1, theta2, x1, x2) - y ) * x1);
+    theta1 = theta1 - ( alpha / m) * summation;
+    return theta1   
 
-def Theta2_Partial_Derivative(theta0, theta1, theta2, dataList):
-     '''
-     description: 
-        takes in the thetas and a dataList and produce the partial derivative 
-        with respect to theta_2 when using a multiple linear model
-     params:
-        theta_0 = number
-        theta_1 = number
-        theta_2 = number
-        dataList = List of objects with "x1", "x2", and "y" values
-     output:
+def Theta2_Gradient(theta0, theta1, theta2, alpha, m, dataList) : 
+    '''
+    description:
+        Use gradient descent to generate the new theta2
+    params:
+        theta0 = number
+        theta1 = number
+        theta2 = number
+        alpha = number
+        m = number
+        dataList = list of objects with 'x1', 'x2' and 'y'
+    output:
         number
-     '''
-     total = 0.0;
-     for data in dataList:
-          total += ( ( Linear_Model(theta0, theta1, theta2, data['x1'], data['x2']) - data['y'] ) * data['x2'] );
-     return total / len(dataList); 
-
+    '''
+    summation = 0.0;
+    for row in dataList:  
+        x1 = row['x1'];
+        x2 = row['x2'];
+        y = row['y'];
+        summation += ( (Linear_Model(theta0, theta1, theta2, x1, x2) - y ) * x2);
+    theta2 = theta2 - ( alpha / m) * summation;
+    return theta2   
+    
 #Given 
-training_data = [
+dataList = [
      { 'x1': 0, 'x2':  1, 'y': 0.6 },
      { 'x1': 1, 'x2':  0, 'y': 2.4 },
      { 'x1': 1, 'x2':  1, 'y': 1.6 },
@@ -108,12 +131,20 @@ training_data = [
     ];
 
 learning_rate = .01;
-theta_0 = 1;
-theta_1 = 1;
-theta_2 = 1;
-new_theta0 = theta_0;
-new_theta1 = theta_1;
-new_theta2 = theta_2; 
+theta0 = 1;
+theta1 = 1;
+theta2 = 1;
+
+'''
+First Iteraions
+'''
+new_theta0 = theta0;
+new_theta1 = theta1;
+new_theta2 = theta2; 
+
+
+
+
 
 theta_0_new = Theta_Gradient_Descent(learning_rate, theta_0, 
                Theta0_Partial_Derivative(theta_0, theta_1, theta_2, training_data));

@@ -60,7 +60,9 @@ def theta0_gradient(theta0, theta1, alpha, m, dataList) :
     '''
     summation = 0.0;
     for row in dataList:  
-        summation += (simple_linear(theta0, theta1, row['x']) - row['y']);
+        x = row['x'];
+        y = row['y'];
+        summation += (simple_linear(theta0, theta1, x) - y);
     theta0 = theta0 - ( alpha / m) * summation;
     return theta0
 
@@ -78,9 +80,11 @@ def theta1_gradient(theta0, theta1, alpha, m, dataList) :
     '''
     summation = 0.0
     for row in dataList: 
-        summation += ((simple_linear(theta0, theta1, row['x']) - row['y']) * row['x'])
-    thetaone = theta1 - ( alpha / m ) * summation
-    return thetaone
+        x = row['x'];
+        y = row['y'];
+        summation += ((simple_linear(theta0, theta1, x) - y) * x)
+    theta1 = theta1 - ( alpha / m ) * summation
+    return theta1
 
 #Initial variables
 m = len(data_List);
@@ -91,7 +95,7 @@ count = 0.0;
 runs = [];
 
 j_theta = cost_function(theta0, theta1, alpha, m, data_List);
-print("J: " + str(j_theta));
+#print("J: " + str(j_theta));
 count += 1;
 runs.append({'run' : count, "J": j_theta});
 
@@ -100,7 +104,7 @@ theta1_new = theta1_gradient(theta0, theta1, alpha, m, data_List);
 theta0 = theta0_new;
 theta1 = theta1_new;
 j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
-print("J_new: " + str(j_theta_new));
+#print("J_new: " + str(j_theta_new));
 count += 1;
 runs.append({'run' : count, "J": j_theta});
 
@@ -113,9 +117,9 @@ while( j_theta > ( j_theta_new * 1.000001 ) ):
     j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
     count += 1;
     runs.append({'run' : count, "J": j_theta});
-    print("J: " + str(j_theta_new));
-    print("Thetaknot: " + str(theta0_new));
-    print("ThetaOne: " + str(theta1_new));
+    #print("J: " + str(j_theta_new));
+    #print("Thetaknot: " + str(theta0_new));
+    #print("ThetaOne: " + str(theta1_new));
 
 print('count: ' + str(count));
 
@@ -127,8 +131,8 @@ for run in runs:
     iteriation.append(run['run']);
 
 plt.plot(iteriation, cost);
-plt.xlabel('Itierations');
+plt.xlabel('Runs');
 plt.ylabel('J(theta) Cost');
-plt.title('J(theta) vs Itierations');
+plt.title('Problem 1 - J(theta) vs Runs');
 
-plt.savefig("display.svg");
+plt.savefig("Problem1_Cost_vs_Runs.svg");
