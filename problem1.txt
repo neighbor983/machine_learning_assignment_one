@@ -1,0 +1,24 @@
+Simple Linear Regression
+
+a. Model Y as a linear funciton of X.
+Y = theta_naught + theta_1 * X
+Y = 1.065 + 1.992 * x
+
+b.Use gradient descent learning algorithm to learn model parameters.  Use an 
+appropriate learning rate and convergence criterion. Plot J for the learning 
+duration.
+
+theta0 = 1.5;
+theta1 = 2.0;
+alpha = .1;
+
+I started off with an alpha of 1 and it didn't converge. Then I lowered alpha 
+and eventually settled with an alpha of .1 
+
+convergence criterion = new_cost > ( old_cost * 1.000001)
+
+The reason I used this criterion was to force the cost to continuously decrease 
+with each iteriation and to force a stop if the new cost doesn't lower the cost 
+a noticable difference. I could easily see this value I changing based on the 
+use case if i have something that doesn't need to be as accurate you could 
+increase the difference to reduce the number of runs needed. 

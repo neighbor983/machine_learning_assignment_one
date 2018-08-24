@@ -1,6 +1,4 @@
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+from plot_helper import scatter_plot, scatter_plot_regression, line_plot
 
 data_List = [   { 'x': 2.0, 'y': 5.1},
                 { 'x': 2.5, 'y': 6.1},
@@ -133,18 +131,6 @@ y1 = [];
 for item in x:
     y1.append(theta0s[-1] + theta1s[-1] * item);
 
-plt.scatter(x,y);
-plt.plot(x,y1);
-plt.xlabel('x');
-plt.ylabel('y');
-plt.title('Problem 1 \nTraining Data');
-
-plt.savefig("Problem1_Training_Data.svg");
-'''
-plt.plot(iteriation, cost);
-plt.xlabel('Runs');
-plt.ylabel('J(theta) Cost');
-plt.title('Problem 1 \nJ(theta) vs Runs');
-
-plt.savefig("Problem1_Cost_vs_Runs.svg");
-'''
+scatter_plot(x, y ,'Problem 1 \nTraining Data', "Problem1_Training_Data.svg");
+scatter_plot_regression(x,y,y1, 'Problem 1 \nTraining Data',"Problem1_Training_Data.svg");
+line_plot(iteriation, cost, 'Problem 1 \nJ(theta) vs Runs', "Problem1_Cost_vs_Runs.svg");

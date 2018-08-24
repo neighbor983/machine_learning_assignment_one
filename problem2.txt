@@ -1,0 +1,38 @@
+Multiple Linear Regression
+
+Model Y as a linear function of X1 and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
+a.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
+
+alpha = .01;
+theta0 = 1;
+theta1 = 1;
+theta2 = 1;
+m = 5;
+
+Equations:
+theta0 = theta0 - (alpha / m ) * Sum( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi);
+theta1 = theta1 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x1i);
+theta2 = theta2 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x2i);
+
+After first Iterations:
+theta0 = 0.987
+theta1 = 0.9886
+theta2 = 0.9792
+
+After Second Iterations:
+theta0: 0.974452
+theta1: 0.9776976
+theta2: 0.9589352
+
+After Third Iterations:
+theta0: 0.962341152
+theta1: 0.9672759616000001
+theta2: 0.9391886112
+
+b.	Code and run the algorithm till convergence.
+
+theta0: 1.2109560668544477
+theta1: 1.4170364204027397
+theta2: -0.9327568863018458
+
+1.2109560668544477 + 1.4170364204027397 * x1 - 0.9327568863018458 * x2

@@ -1,18 +1,5 @@
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+from plot_helper import surface_plot
 
-'''
-Model Y as a linear function of X1and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
-1.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
-2.	Code and run the algorithm till convergence.
-
-You must submit the following
-1.	Source code
-2.	Output – Initial and final values of parameters; regression line and data; plots of J
-3.	Your observations and conclusions.
-
-'''
 def Linear_Model(theta0, theta1, theta2, x1, x2):
     '''
     description:
@@ -193,3 +180,9 @@ print("theta0: " + str(new_theta0));
 print("theta1: " + str(new_theta1));
 print("theta2: " + str(new_theta2));
 print("J(0): " + str(j_theta_new));
+
+x1 = [0, 1, 1, 2, 1];
+x2 = [1, 0, 1, 1, 2];
+y = [.6, 2.4, 1.6, 3.4, .5];
+
+surface_plot(x1, x2, y, 'Problem 2 \nTraining Data', "Problem2_Training_Data.svg")
