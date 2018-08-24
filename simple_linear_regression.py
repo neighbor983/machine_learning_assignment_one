@@ -2,144 +2,133 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-def Linear_Model(theta_0, theta_1, x_i):
+data_List = [   { 'x': 2.0, 'y': 5.1},
+                { 'x': 2.5, 'y': 6.1},
+                { 'x': 3.0, 'y': 6.9},
+                { 'x': 3.5, 'y': 7.8},
+                { 'x': 4.0, 'y': 9.2},
+                { 'x': 4.5, 'y': 9.9},
+                { 'x': 5.0, 'y': 11.5},
+                { 'x': 5.5, 'y': 12.0},
+                { 'x': 6.0, 'y': 12.8}];
+
+def simple_linear(theta0, theta1, x):
     '''
     description:
         takes in the thetas and the x_i and returns the predicted y for a simple linear regression
     params:
-        theta_0 = number
-        theta_1 = number    
-        xi = number
+        theta0 = number
+        theta1 = number    
+        x = number
     output:
         number
     '''
-    return theta_0 + theta_1 * x_i;
-    
-def Cost_Function(theta_0, theta_1, dataList):
-    total = 0.0;
-    for data in dataList:
-        total += ( (Linear_Model(theta_0, theta_1, data['x']) - data['y']) ** 2);
-    return total / ( 2.0 * len(dataList) );
+    return theta0 + theta1 * x;
 
-def Theta0_Partial_Derivative(theta_0, theta_1, dataList):
-    '''
-    description: 
-        takes in the thetas and a dataList and produce the partial derivative 
-        with respect to theta_0 when using a simple linear model
-    params:
-        theta_0 = number
-        theta_1 = number
-        dataList = List of objects with an "x" and "y" values
-    output:
-        number
-    '''
-    total = 0.0;
-    for data in dataList:
-        total += (Linear_Model(theta_0, theta_1, data['x']) - data['y']);
-    return total / len(dataList);
-
-def Theta1_Partial_Derivative(theta_0, theta_1, dataList):
-    '''
-    description: 
-        takes in the thetas and a dataList and produce the partial derivative 
-        with respect to theta_1 when using a simple linear model
-    params:
-        theta_0 = number
-        theta_1 = number
-        dataList = List of objects with an "x" and "y" values
-    output:
-        number
-    '''
-    total = 0.0;
-    for data in dataList:
-        total += ((Linear_Model(theta_0, theta_1, data['x']) - data['y']) * data['x']);
-    return total / len(dataList);
-
-def Theta_Gradient_Descent(alpha, old_theta, partial_derivative):
+def cost_function(theta0, theta1, alpha, m, dataList):
     '''
     description:
-        Use gradient descent to generate the new theta
+        get the cost for a given model and thetas
     params:
-        alpha = number 
-        old_theta = number 
-        partial_derivative = number
+        theta0 = number
+        theta1 = number
+        alpha = number
+        m = number
+        dataList = list of objects with 'x' and 'y'
     output:
-        output
+        number
     '''
-    return old_theta - ( alpha * partial_derivative );
+    summation = 0.0;
+    for row in dataList: 
+        x = row['x'];
+        y = row['y'];
+        summation += (simple_linear(theta0, theta1,x) - y)**2;
+    cost = (.5*m) * summation;
+    return cost;
 
-#Given Values
-training_data = [   { 'x': 2.0, 'y': 5.1},
-                    { 'x': 2.5, 'y': 6.1},
-                    { 'x': 3.0, 'y': 6.9},
-                    { 'x': 3.5, 'y': 7.8},
-                    { 'x': 4.0, 'y': 9.2},
-                    { 'x': 4.5, 'y': 9.9},
-                    { 'x': 5.0, 'y': 11.5},
-                    { 'x': 5.5, 'y': 12.0},
-                    { 'x': 6.0, 'y': 12.8}];
+def theta0_gradient(theta0, theta1, alpha, m, dataList) : 
+    '''
+    description:
+        Use gradient descent to generate the new theta0
+    params:
+        theta0 = number
+        theta1 = number
+        alpha = number
+        dataList = list of objects with 'x' and 'y'
+    output:
+        number
+    '''
+    summation = 0.0;
+    for row in dataList:  
+        summation += (simple_linear(theta0, theta1, row['x']) - row['y']);
+    theta0 = theta0 - ( alpha / m) * summation;
+    return theta0
 
-#Intial Guesses
-theta_naught = 1.0;
-theta_one = 1.5;
-learning_rate = .0099;
+def theta1_gradient(theta0, theta1, alpha, m, dataList) : 
+    '''
+    description:
+        Use gradient descent to generate the new theta1
+    params:
+        theta0 = number
+        theta1 = number
+        alpha = number
+        dataList = list of objects with 'x' and 'y'
+    output:
+        number
+    '''
+    summation = 0.0
+    for row in dataList: 
+        summation += ((simple_linear(theta0, theta1, row['x']) - row['y']) * row['x'])
+    thetaone = theta1 - ( alpha / m ) * summation
+    return thetaone
 
-'''
-Tried learning_rate  
-    1 didn't converge
-    .5 didn't converge 
-    .1 did converge 6.3 cost
-    .05 did converge .07 cost
-    .01 did converge .05104 cost
-    .005 did converge .051146 cost
-    .007 did converge .051102 cost
-    .008 did converge .0510815 cost
-    .009 did converge .0510606 cost
-    .0095 did converge .0510507 cost
-    .00975 did converge .0510453 cost
-    .0098 did converge .0510443 cost
-    .0099 did converge .0510423 cost
-'''
+#Initial variables
+m = len(data_List);
+theta0 = 1.5;
+theta1 = 2.0;
+alpha = .1;
+count = 0.0;
+runs = [];
 
-#Need a starting point for the loop
-theta_naught_new = theta_naught;
-theta_one_new = theta_one;
-previous_cost = 100.0;
-new_cost = 90.0;
-count = 0
-J_theta = [];
+j_theta = cost_function(theta0, theta1, alpha, m, data_List);
+print("J: " + str(j_theta));
+count += 1;
+runs.append({'run' : count, "J": j_theta});
 
-'''
-Continue to iteriate if the the cost goes down and the percent of the change 
-compared to the previous_cost is greater then .001%
-'''
-while( ( (previous_cost - new_cost) / previous_cost) > 0.00001):
-    previous_cost = new_cost;
-    theta_naught = theta_naught_new;
-    theta_one =theta_one_new;
-    theta_naught_new = Theta_Gradient_Descent(learning_rate, theta_naught, 
-                    Theta0_Partial_Derivative(theta_naught, theta_one, training_data));
-    theta_one_new = Theta_Gradient_Descent(learning_rate, theta_naught, 
-                    Theta1_Partial_Derivative(theta_naught, theta_one, training_data));
-    new_cost = Cost_Function(theta_naught_new, theta_one_new, training_data);
-    print("Cost: " + str(new_cost));
-    count+=1;
-    J_theta.append({'count': count, 'cost': new_cost});
-    
-print("theta_naught: " + str(theta_naught_new) );
-print("theta_one: " + str(theta_one_new) );    
-print('Count: ' + str(count));
+theta0_new = theta0_gradient(theta0, theta1, alpha, m, data_List);
+theta1_new = theta1_gradient(theta0, theta1, alpha, m, data_List);
+theta0 = theta0_new;
+theta1 = theta1_new;
+j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
+print("J_new: " + str(j_theta_new));
+count += 1;
+runs.append({'run' : count, "J": j_theta});
+
+while( j_theta > ( j_theta_new * 1.000001 ) ):
+    theta0_new = theta0_gradient(theta0, theta1, alpha, m, data_List);
+    theta1_new = theta1_gradient(theta0, theta1, alpha, m, data_List);
+    theta0 = theta0_new;
+    theta1 = theta1_new;
+    j_theta = j_theta_new;
+    j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
+    count += 1;
+    runs.append({'run' : count, "J": j_theta});
+    print("J: " + str(j_theta_new));
+    print("Thetaknot: " + str(theta0_new));
+    print("ThetaOne: " + str(theta1_new));
+
+print('count: ' + str(count));
 
 cost = [];
 iteriation = [];
 
-for J in J_theta:
-    cost.append(J['cost']);
-    iteriation.append(J['count']);
+for run in runs:
+    cost.append(run['J']);
+    iteriation.append(run['run']);
 
 plt.plot(iteriation, cost);
-plt.xlabel('Itierations')
-plt.ylabel('J(theta) Cost')
-plt.title('J(theta) vs Itierations')
+plt.xlabel('Itierations');
+plt.ylabel('J(theta) Cost');
+plt.title('J(theta) vs Itierations');
 
 plt.savefig("display.svg");
