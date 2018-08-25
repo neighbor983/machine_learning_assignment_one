@@ -14,7 +14,7 @@ theta0 = theta0 - (alpha / m ) * Sum( ( theta0 + theta1 * x1i + theta2 * x2i ) -
 theta1 = theta1 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x1i);
 theta2 = theta2 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x2i);
 
-After first Iterations:
+After first Iteration:
 theta0 = theta0 - (alpha / m ) * Sum( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi)
 after substituting values becomes: 
 theta0 = 1 - ( .01 / 5 ) * 6.5
@@ -30,14 +30,36 @@ after substituting values becomes:
 theta2 = 1 - ( .01 / 5 ) * 10.4
 theta2 = 0.9792
 
-After Second Iterations:
+After Second Iteration:
+theta0 = theta0 - (alpha / m ) * Sum( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi)
+after substituting values becomes: 
+theta0 = 0.987 - ( .01 / 5 ) * 6.274
 theta0 = 0.974452
+
+theta1 = theta1 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x1i)
+after substituting values becomes: 
+theta1 = 0.9886 - ( .01 / 5 ) * 5.4512
 theta1 = 0.9776976
+
+theta2 = theta2 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x2i)
+after substituting values becomes: 
+theta2 = 0.9792 - ( .01 / 5 ) * 10.1324
 theta2: 0.9589352
 
-After Third Iterations:
+After Third Iteration:
+theta0 = theta0 - (alpha / m ) * Sum( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi)
+after substituting values becomes: 
+theta0 = 0.974452 - ( .01 / 5 ) * 6.055424
 theta0: 0.962341152
+
+theta1 = theta1 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x1i)
+after substituting values becomes: 
+theta1 = 0.9776976 - ( .01 / 5 ) * 5.2108192
 theta1: 0.9672759616000001
+
+theta2 = theta2 - (alpha / m ) * Sum( ( ( theta0 + theta1 * x1i + theta2 * x2i ) - yi) * x2i)
+after substituting values becomes: 
+theta2 = 0.9589352 - ( .01 / 5 ) * 9.8732944
 theta2: 0.9391886112
 
 b.	Code and run the algorithm till convergence.
