@@ -25,8 +25,8 @@ theta2 = 1 - ( .01 / 5 ) * 10.4
 theta2 = 0.9792
 
 After Second Iterations:
-theta0: 0.974452
-theta1: 0.9776976
+theta0 = 0.974452
+theta1 = 0.9776976
 theta2: 0.9589352
 
 After Third Iterations:
