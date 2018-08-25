@@ -1,7 +1,10 @@
 Multiple Linear Regression
 
-Model Y as a linear function of X1 and X2.  Assume that the learning rate is 0.01, and initial values of the parameters are [1, 1, 1].  
-a.	Illustrate gradient descent algorithm by updating the parameters 3 iterations.  
+Model Y as a linear function of X1 and X2.  Assume that the learning rate is 
+0.01, and initial values of the parameters are [1, 1, 1].  
+
+a.	Illustrate gradient descent algorithm by updating the parameters 3 
+iterations.  
 
 alpha = .01;
 theta0 = 1;
