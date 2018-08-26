@@ -4,6 +4,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+import numpy as np
+
 def scatter_plot(x, y, title, filename):
     plt.scatter(x,y);
     plt.xlabel('x');
@@ -30,10 +32,28 @@ def line_plot(runs, cost, title, filename):
     plt.savefig(filename);
     plt.close();
     
-def surface_plot(x1, x2, y, title, filename):
+def scatter_3d_plot(x1, x2, y, title, filename):
     fig = plt.figure();
     ax = plt.axes(projection='3d');
     ax.scatter(x1, x2, y);
     
     plt.savefig(filename);
-    plt.close()
+    plt.close();
+    
+def surface_3d_plot(theta0, theta1, theta2, title, filename):
+    fig = plt.figure();
+    ax = plt.axes(projection='3d');
+    def f(x1, x2, theta0, theta1, theta2):
+        return theta0 + theta1 * x1 + theta2 * x2; 
+
+    x1 = np.linspace(-6, 6, 30);
+    x2 = np.linspace(-6, 6, 30);
+
+    X1, X2 = np.meshgrid(x1, x2);
+    Z = f(X1, X2, theta0, theta1, theta2);
+    
+    
+    ax.plot_surface(x1, x2, Z, rstride=1, cstride=1,
+                cmap='viridis', edgecolor='none')
+    plt.savefig(filename);
+    plt.close();
