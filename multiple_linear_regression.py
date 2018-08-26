@@ -1,4 +1,4 @@
-from plot_helper import scatter_3d_plot
+from plot_helper import scatter_3d_plot, surface_3d_plot
 
 def Linear_Model(theta0, theta1, theta2, x1, x2):
     '''
@@ -185,4 +185,6 @@ x1 = [0, 1, 1, 2, 1];
 x2 = [1, 0, 1, 1, 2];
 y = [.6, 2.4, 1.6, 3.4, .5];
 
-scatter_3d_plot(x1, x2, y, 'Problem 2 \nTraining Data', "Problem2_Training_Data.svg")
+scatter_3d_plot(x1, x2, y, 'Problem 2 \nTraining Data', "Problem2_Training_Data.svg");
+title = "Surface Plot\n" + str(round(theta0, 3)) + " + " + str(round(theta1, 3)) + " * x1 " + str(round(theta2, 3)) + " * x2";
+surface_3d_plot(theta0, theta1, theta2, x1, x2, y, title, "Problem2_Surface_Plot.svg");
