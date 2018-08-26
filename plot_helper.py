@@ -14,7 +14,7 @@ def scatter_plot(x, y, title, filename):
     
 def scatter_plot_regression(x,y,y1, title, filename):
     plt.scatter(x,y, label = 'data points');
-    plt.plot(x,y1, label = 'regression line \n1.065 + 1.992 * x');
+    plt.plot(x,y1, label = 'regression line \n1.044 + 1.997 * X');
     plt.xlabel('x');
     plt.ylabel('y');
     plt.title(title);

@@ -86,8 +86,8 @@ def theta1_gradient(theta0, theta1, alpha, m, dataList) :
 
 #Initial variables
 m = len(data_List);
-theta0 = 1.5;
-theta1 = 2.0;
+theta0 = 0.0;
+theta1 = 0.0;
 alpha = .1;
 count = 0.0;
 runs = [];
@@ -104,7 +104,7 @@ j_theta_new = cost_function(theta0_new, theta1_new, alpha, m, data_List);
 count += 1;
 runs.append({'run' : count, "J": j_theta, "theta_0": theta0, "theta_1": theta1});
 
-while( j_theta > ( j_theta_new * 1.000001 ) ):
+while( j_theta > ( j_theta_new * 1.00001 ) ):
     theta0_new = theta0_gradient(theta0, theta1, alpha, m, data_List);
     theta1_new = theta1_gradient(theta0, theta1, alpha, m, data_List);
     theta0 = theta0_new;
@@ -118,6 +118,11 @@ cost = [];
 iteriation = [];
 theta0s = [];
 theta1s = [];
+
+print("count: " + str(runs[-1]['run']));
+print("theta0: " +str(runs[-1]['theta_0']));
+print("theta1: " + str(runs[-1]['theta_1']));
+print("J(0): " + str(runs[-1]['J']));
 
 for run in runs:
     cost.append(run['J']);
