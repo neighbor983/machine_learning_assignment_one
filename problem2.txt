@@ -136,3 +136,9 @@ theta2: -0.9327568863018458
 J(theta): 0.7907294440296793
 
 1.2109560668544477 + 1.4170364204027397 * x1 - 0.9327568863018458 * x2
+
+Theta2 decreased consistently throughout the runs till it converged at approximately -.93.
+
+Theta0 decreased from 1.0 to approximately .68 then made a steady increase until it converged at approximately 1.2.
+
+Theta1 decreased to approximately .82 then began to increase to approximately 1.47 then began to decrease until it converged around 1.41.

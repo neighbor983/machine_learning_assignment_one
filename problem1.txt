@@ -22,3 +22,9 @@ with each iteriation and to force a stop if the new cost doesn't lower the cost
 a noticable difference. I could easily see this value changing based on the use 
 case if you have something that doesn't need to be as accurate you could 
 increase the difference to reduce the number of runs needed. 
+
+Theta1 continued to bounce around just above 2.0 until about 50 runs where it begins to slowly move to just below 2.
+
+Theta0 bounced around until about 50 runs where it was .6 then it began to continuously increase to approximately 1.04.
+
+Theta1 converged faster and once it steadied out theta0 found a valley in cost and continued to increase until it converged.  
