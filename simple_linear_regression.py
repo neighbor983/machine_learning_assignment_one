@@ -1,4 +1,4 @@
-from plot_helper import scatter_plot, scatter_plot_regression, line_plot
+from plot_helper import scatter_plot, scatter_plot_regression, line_plot, theta_run_plot
 
 data_List = [   { 'x': 2.0, 'y': 5.1},
                 { 'x': 2.5, 'y': 6.1},
@@ -139,3 +139,5 @@ for item in x:
 scatter_plot(x, y ,'Problem 1 \nTraining Data', "Problem1_Training_Data.svg");
 scatter_plot_regression(x,y,y1, 'Problem 1 \nTraining Data',"Problem1_Training_Data.svg");
 line_plot(iteriation, cost, 'Problem 1 \nJ(theta) vs Runs', "Problem1_Cost_vs_Runs.svg");
+theta_run_plot(iteriation, theta0s, 'Problem 1 \nTheta0 vs Runs', 'Theta0_vs_Runs.svg');
+theta_run_plot(iteriation, theta1s, 'Problem 1 \nTheta1 vs Runs', 'Theta1_vs_Runs.svg');

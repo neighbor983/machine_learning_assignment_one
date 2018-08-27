@@ -33,6 +33,15 @@ def line_plot(runs, cost, title, filename):
     plt.savefig(filename);
     plt.close();
     
+def theta_run_plot(theta, runs, title, filename):
+    plt.plot(theta, runs);
+    plt.xlabel('Runs');
+    plt.ylabel('Theta');
+    plt.title(title);
+    plt.savefig(filename);
+    plt.close();
+    
+    
 def scatter_3d_plot(x1, x2, y, title, filename):
     fig = plt.figure();
     ax = plt.axes(projection='3d');
