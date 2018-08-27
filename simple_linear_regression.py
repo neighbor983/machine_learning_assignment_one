@@ -1,3 +1,4 @@
+#simple_linear_regression.py
 from plot_helper import scatter_plot, scatter_plot_regression, line_plot, theta_run_plot
 
 data_List = [   { 'x': 2.0, 'y': 5.1},
@@ -118,11 +119,6 @@ cost = [];
 iteriation = [];
 theta0s = [];
 theta1s = [];
-
-print("count: " + str(runs[-1]['run']));
-print("theta0: " +str(runs[-1]['theta_0']));
-print("theta1: " + str(runs[-1]['theta_1']));
-print("J(0): " + str(runs[-1]['J']));
 
 for run in runs:
     cost.append(run['J']);
