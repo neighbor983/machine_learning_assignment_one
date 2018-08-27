@@ -1,3 +1,5 @@
+#multiple_linear_regression.py
+
 from plot_helper import scatter_3d_plot, surface_3d_plot, theta_run_plot
 
 def Linear_Model(theta0, theta1, theta2, x1, x2):
@@ -174,12 +176,6 @@ while(j_theta  > (j_theta_new * 1.00001) ):
     count += 1;
     runs.append({'run' : count, "J": j_theta, "theta_0": theta0, "theta_1": theta1, "theta_2": theta2});
     
-print("count: " + str(count));
-print("theta0: " + str(new_theta0));
-print("theta1: " + str(new_theta1));
-print("theta2: " + str(new_theta2));
-print("J(0): " + str(j_theta_new));
-
 cost = [];
 iteriation = [];
 theta0s = [];
