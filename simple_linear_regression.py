@@ -139,5 +139,5 @@ for item in x:
 scatter_plot(x, y ,'Problem 1 \nTraining Data', "Problem1_Training_Data.svg");
 scatter_plot_regression(x,y,y1, 'Problem 1 \nTraining Data',"Problem1_Training_Data.svg");
 line_plot(iteriation, cost, 'Problem 1 \nJ(theta) vs Runs', "Problem1_Cost_vs_Runs.svg");
-theta_run_plot(iteriation, theta0s, 'Problem 1 \nTheta0 vs Runs', 'Theta0_vs_Runs.svg');
-theta_run_plot(iteriation, theta1s, 'Problem 1 \nTheta1 vs Runs', 'Theta1_vs_Runs.svg');
+theta_run_plot(iteriation, theta0s, 'Problem 1 \nTheta0 vs Runs', 'Problem1_Theta0_vs_Runs.svg');
+theta_run_plot(iteriation, theta1s, 'Problem 1 \nTheta1 vs Runs', 'Problem1_Theta1_vs_Runs.svg');
